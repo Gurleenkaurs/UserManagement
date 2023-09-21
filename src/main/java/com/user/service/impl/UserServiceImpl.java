@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.user.exception.UserNotFoundException;
 import com.user.model.User;
 import com.user.repository.UserRepository;
 import com.user.service.UserService;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUserById(int id) {
-		User user=this.userRepository.findById(id);
+		User user=this.userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("UserNot Found"));
 		return user;
 	}
 
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(User user, int id) {
 		// TODO Auto-generated method stub
-		User userToUpdate=this.userRepository.findById(id);
+		User userToUpdate=this.userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("UserNot Found"));
 		User updatedUser=this.userRepository.save(user);
 		return updatedUser;
 		
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUser(int id) {
 		
-		User userToDelete=this.userRepository.findById(id);
+		User userToDelete=this.userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("UserNot Found"));
 		this.userRepository.delete(userToDelete);
 
 	}
