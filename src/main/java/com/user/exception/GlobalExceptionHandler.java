@@ -10,7 +10,7 @@ import com.user.model.ApiResponse;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-	
+
 	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<ApiResponse>  handleUserNotFoundException(UserNotFoundException ex)
 	{

@@ -45,6 +45,16 @@ public class UserController {
 	}
 	
 	
+	//Getting User By Name
+	@GetMapping("/AllUsers/{name}")
+	public ResponseEntity<List<User>>  getUserByName(@PathVariable String name)
+	{
+		List<User>  users=this.userService.getUserByName(name);
+		return new ResponseEntity<>(users,HttpStatus.OK);
+		
+	}
+	
+	
 	//Saving User
 	@PostMapping("/")
 	public ResponseEntity<User>  createUser(@RequestBody User user)
